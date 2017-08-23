@@ -21,14 +21,15 @@ class SingleRxTest : StringSpec() {
             val todoObservable: Observable<Todo> = Observable.create({ emitter ->
                 try {
                     TodoMemoryRepository().allTodos().forEach { emitter.onNext(it) }
-                    emitter.onError(IllegalArgumentException("bad permissions"))
+                    emitter.onError(IllegalArgumentException("Illegal arguments!!"))
                     emitter.onComplete()
                 } catch (e: Exception) {
                     emitter.onError(e)
                 }
             })
 
-            val disposable = todoObservable.subscribe({ todo -> println(todo)}, {e -> e.printStackTrace()})
+            val disposable = todoObservable.subscribe({todo -> println(todo)},
+                                                      {e -> e.printStackTrace()})
             disposable.dispose()
         }
 
@@ -36,7 +37,7 @@ class SingleRxTest : StringSpec() {
             val todoObservable: Observable<Todo> = Observable.create({ emitter ->
                 try {
                     TodoMemoryRepository().allTodos().forEach { emitter.onNext(it) }
-                    emitter.onError(IllegalArgumentException("bad permissions"))
+                    emitter.onError(IllegalArgumentException("Illegal arguments!!"))
                     emitter.onComplete()
                 } catch (e: Exception) {
                     emitter.onError(e)
